@@ -1,4 +1,4 @@
 # SIH-2026-PROJECT-WORK
 SMRITI APP DESIGNING
-hello boy 
-hello gay 
+Paras GAY
+
