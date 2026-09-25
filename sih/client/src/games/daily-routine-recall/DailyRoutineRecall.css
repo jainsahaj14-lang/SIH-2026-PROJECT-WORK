@@ -1,0 +1,636 @@
+/**
+ * DailyRoutineRecall.css
+ * 
+ * Scoped styles for the Daily Routine Recall exercise.
+ * Matches the phone-mockup aesthetic, zigzag sequence diagram with diagonal arrows,
+ * floating emoji tray, and celebratory feedback.
+ */
+
+/* -------------------------------------------------------------
+   1. Outer Phone Mockup Frame & Wrapper
+-------------------------------------------------------------- */
+.drr-wrapper {
+  background-color: #1C1C2E;
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color: #000000;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.drr-phone-mockup {
+  width: 100%;
+  max-width: 430px;
+  background-color: #1C1C2E;
+  border-radius: 46px;
+  padding: 12px;
+  box-shadow: 
+    0 25px 60px -12px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.8);
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Speaker / Camera Notch Mockup on top */
+.drr-phone-notch {
+  width: 110px;
+  height: 18px;
+  background-color: #0F0F1A;
+  border-radius: 12px;
+  margin: 0 auto 10px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.drr-notch-camera {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #1F2238;
+}
+
+.drr-notch-speaker {
+  width: 40px;
+  height: 4px;
+  border-radius: 3px;
+  background-color: #1F2238;
+}
+
+/* -------------------------------------------------------------
+   2. Main Card Container (Soft Cream Background)
+-------------------------------------------------------------- */
+.drr-card {
+  background-color: #FAF3E8;
+  border-radius: 34px;
+  padding: 24px 20px 22px 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  min-height: 740px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Header & Title */
+.drr-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.drr-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.drr-title-emoji {
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.drr-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #000000;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Thin horizontal divider below title */
+.drr-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #000000;
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+
+/* -------------------------------------------------------------
+   3. Sequence Diagram (Zigzag Layout with Connecting Arrows)
+-------------------------------------------------------------- */
+.drr-sequence-container {
+  position: relative;
+  width: 100%;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4px 6px;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+}
+
+/* SVG overlay layer for the thin diagonal arrows */
+.drr-arrow-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+
+/* Step row container */
+.drr-step-row {
+  display: flex;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.drr-step-row.drr-align-left {
+  justify-content: flex-start;
+  padding-left: 14px;
+}
+
+.drr-step-row.drr-align-right {
+  justify-content: flex-end;
+  padding-right: 14px;
+}
+
+/* Individual Step Box (Lavender-Gray #C9C8D6) */
+.drr-step-box {
+  background-color: #C9C8D6;
+  border-radius: 16px;
+  min-width: 140px;
+  height: 48px;
+  padding: 4px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #000000;
+  letter-spacing: -0.01em;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), 
+              box-shadow 0.2s ease, 
+              border-color 0.2s ease, 
+              background-color 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  position: relative;
+}
+
+/* When dragged over or targeted */
+.drr-step-box.drr-drag-over {
+  border-color: #000000;
+  transform: scale(1.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+  background-color: #BCB9CD;
+}
+
+/* When tap-selected activity is waiting for a slot */
+.drr-step-box.drr-target-ready {
+  border: 2px dashed #000000;
+  animation: drr-pulse-border 1.5s infinite ease-in-out;
+}
+
+/* Filled step box */
+.drr-step-box.drr-filled {
+  background-color: #C9C8D6; /* Maintain same box color as per requirement */
+  cursor: grab;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.drr-step-box.drr-filled:active {
+  cursor: grabbing;
+}
+
+/* Inside filled step box: activity label & icon */
+.drr-step-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #000000;
+  text-transform: lowercase;
+  white-space: nowrap;
+}
+
+.drr-step-emoji {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.drr-step-label {
+  font-weight: 800;
+  color: #000000;
+}
+
+/* Placeholder text (e.g. "step 1", "step 2") */
+.drr-step-placeholder {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #111111;
+  text-transform: lowercase;
+}
+
+/* Subtle remove badge on hover for filled steps */
+.drr-step-remove-btn {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #000000;
+  color: #FAF3E8;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 900;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 10;
+}
+
+.drr-step-box:hover .drr-step-remove-btn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* -------------------------------------------------------------
+   4. Activity Tray Section (Rounded Bordered Box with Cream BG)
+-------------------------------------------------------------- */
+.drr-tray-container {
+  background-color: #FAF3E8;
+  border: 1.5px solid #000000;
+  border-radius: 26px;
+  padding: 18px 12px 16px 12px;
+  position: relative;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+/* Tray Rows */
+.drr-tray-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.drr-tray-row.drr-tray-row-center {
+  justify-content: center;
+}
+
+/* Activity Item (Floating on cream background, NO box/border) */
+.drr-tray-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  padding: 6px 10px;
+  min-width: 95px;
+  transition: transform 0.18s cubic-bezier(0.2, 0, 0, 1), 
+              opacity 0.2s ease, 
+              filter 0.18s ease;
+  touch-action: none; /* crucial for smooth touch drag */
+  background: transparent;
+  border: none;
+  outline: none;
+  border-radius: 16px;
+}
+
+.drr-tray-item:hover:not(.drr-placed) {
+  transform: scale(1.08);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12));
+}
+
+.drr-tray-item:active:not(.drr-placed) {
+  cursor: grabbing;
+  transform: scale(1.12);
+}
+
+/* Marked as placed (grayed out / ghosted) */
+.drr-tray-item.drr-placed {
+  opacity: 0.22;
+  cursor: default;
+  pointer-events: none;
+  transform: scale(0.92);
+}
+
+/* Tap-to-select indicator */
+.drr-tray-item.drr-selected {
+  outline: 2px dashed #000000;
+  background-color: rgba(201, 200, 214, 0.35);
+  transform: scale(1.08);
+  animation: drr-pulse-selected 1.5s infinite ease-in-out;
+}
+
+.drr-tray-emoji {
+  font-size: 2.25rem;
+  line-height: 1.1;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+}
+
+.drr-tray-label {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #000000;
+  text-align: center;
+  text-transform: lowercase;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+/* -------------------------------------------------------------
+   5. Action Buttons & Feedback Banners
+-------------------------------------------------------------- */
+.drr-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  gap: 12px;
+}
+
+.drr-hint-text {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #555555;
+}
+
+.drr-btn-reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: #000000;
+  color: #FAF3E8;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 18px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+.drr-btn-reset:hover {
+  background-color: #26263B;
+  transform: translateY(-1px);
+}
+
+.drr-btn-reset:active {
+  transform: scale(0.96);
+}
+
+/* Feedback alert banner (gentle retry message) */
+.drr-feedback-banner {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 0.92rem;
+  animation: drr-shake 0.4s ease;
+}
+
+.drr-feedback-banner.drr-feedback-error {
+  background-color: #FEE2E2;
+  border: 1.5px solid #EF4444;
+  color: #B91C1C;
+}
+
+.drr-feedback-banner.drr-feedback-info {
+  background-color: #E0F2FE;
+  border: 1.5px solid #0284C7;
+  color: #0369A1;
+}
+
+/* -------------------------------------------------------------
+   6. Celebratory Success Modal
+-------------------------------------------------------------- */
+.drr-modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(28, 28, 46, 0.72);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  border-radius: 34px;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: drr-fade-in 0.25s ease-out;
+}
+
+.drr-modal-card {
+  background-color: #FAF3E8;
+  border: 3px solid #000000;
+  border-radius: 28px;
+  padding: 32px 24px;
+  text-align: center;
+  max-width: 320px;
+  width: 100%;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+  animation: drr-pop-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-sizing: border-box;
+}
+
+.drr-modal-icon-circle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background-color: #10B981;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px auto;
+  box-shadow: 0 8px 18px rgba(16, 185, 129, 0.35);
+  font-size: 32px;
+}
+
+.drr-modal-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #000000;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+
+.drr-modal-subtitle {
+  font-size: 0.95rem;
+  color: #475569;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.drr-modal-btn-play {
+  width: 100%;
+  background-color: #000000;
+  color: #FAF3E8;
+  border: none;
+  border-radius: 16px;
+  padding: 14px 20px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.drr-modal-btn-play:hover {
+  background-color: #1F1F35;
+  transform: translateY(-2px);
+}
+
+.drr-modal-btn-play:active {
+  transform: scale(0.97);
+}
+
+/* -------------------------------------------------------------
+   7. Touch Drag Floating Ghost Badge
+-------------------------------------------------------------- */
+.drr-touch-ghost {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%) scale(1.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(250, 243, 232, 0.96);
+  border: 2px solid #000000;
+  border-radius: 18px;
+  padding: 8px 14px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+}
+
+.drr-touch-ghost .drr-ghost-emoji {
+  font-size: 2.2rem;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.drr-touch-ghost .drr-ghost-label {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #000000;
+}
+
+/* -------------------------------------------------------------
+   8. Keyframe Animations
+-------------------------------------------------------------- */
+@keyframes drr-pulse-border {
+  0% { border-color: rgba(0, 0, 0, 0.3); }
+  50% { border-color: rgba(0, 0, 0, 1); transform: scale(1.02); }
+  100% { border-color: rgba(0, 0, 0, 0.3); }
+}
+
+@keyframes drr-pulse-selected {
+  0% { transform: scale(1.05); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(1.05); }
+}
+
+@keyframes drr-shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+@keyframes drr-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes drr-pop-in {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* -------------------------------------------------------------
+   9. Responsive Adaptations
+-------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .drr-wrapper {
+    padding: 12px 6px;
+  }
+  
+  .drr-phone-mockup {
+    border-radius: 36px;
+    padding: 8px;
+  }
+  
+  .drr-card {
+    border-radius: 28px;
+    padding: 18px 14px;
+    min-height: 680px;
+  }
+
+  .drr-sequence-container {
+    min-height: 320px;
+  }
+
+  .drr-step-box {
+    min-width: 125px;
+    height: 44px;
+    font-size: 0.95rem;
+    padding: 2px 10px;
+  }
+
+  .drr-tray-emoji {
+    font-size: 2rem;
+  }
+
+  .drr-tray-label {
+    font-size: 0.88rem;
+  }
+
+  .drr-step-row.drr-align-left {
+    padding-left: 8px;
+  }
+
+  .drr-step-row.drr-align-right {
+    padding-right: 8px;
+  }
+}

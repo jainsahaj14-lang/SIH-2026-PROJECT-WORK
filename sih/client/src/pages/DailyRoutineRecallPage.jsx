@@ -6,13 +6,13 @@ import { saveLocalGameSession } from '../db/dexieDb';
 import { api } from '../services/api';
 
 /**
- * RoutineRecallGame
+ * DailyRoutineRecallPage
  * 
- * Primary page for the Daily Routine Recall cognitive exercise.
- * Mounts the phone-mockup Drag-and-Drop / Touch memory sequencing component
- * with Dexie offline DB telemetry and seamless app navigation.
+ * Standalone page wrapper for the Daily Routine Recall game,
+ * seamlessly integrating back navigation, user session telemetry,
+ * and the responsive phone-mockup component.
  */
-export default function RoutineRecallGame() {
+export default function DailyRoutineRecallPage() {
   const navigate = useNavigate();
   const currentUser = api.getCurrentUser();
 
@@ -22,21 +22,21 @@ export default function RoutineRecallGame() {
         patientId: currentUser?.patientId || 'demo-patient',
         gameType: 'routine_recall',
         difficultyTier: 1,
-        startTime: new Date(Date.now() - (sessionData.timeTakenSec || 30) * 1000).toISOString(),
+        startTime: new Date(Date.now() - sessionData.timeTakenSec * 1000).toISOString(),
         endTime: new Date().toISOString(),
         accuracy: 100,
-        avgResponseTimeMs: Math.round(((sessionData.timeTakenSec || 30) * 1000) / 5),
+        avgResponseTimeMs: Math.round((sessionData.timeTakenSec * 1000) / 5),
         hesitationCount: 0,
         completed: true,
       });
     } catch (err) {
-      console.warn('Could not save routine recall session:', err);
+      console.warn('Could not save session to local DB:', err);
     }
   };
 
   return (
     <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '16px 20px' }}>
-      {/* Top Navigation */}
+      {/* Back navigation button */}
       <div style={{ marginBottom: '16px' }}>
         <button
           onClick={() => navigate('/games')}
@@ -49,11 +49,8 @@ export default function RoutineRecallGame() {
         </button>
       </div>
 
-      {/* Daily Routine Recall Drag-and-Drop Component */}
-      <DailyRoutineRecall
-        onComplete={handleGameComplete}
-        showPhoneFrame={true}
-      />
+      {/* Render the Daily Routine Recall exercise */}
+      <DailyRoutineRecall onComplete={handleGameComplete} showPhoneFrame={true} />
     </div>
   );
 }

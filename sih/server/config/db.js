@@ -5,7 +5,7 @@ let memoryServerInstance = null;
 
 const connectDB = async () => {
   const primaryUri = process.env.MONGO_URI || 'mongodb://localhost:27017/cognicare_ner';
-  
+
   try {
     // Attempt local MongoDB connection first with a 3-second timeout
     await mongoose.connect(primaryUri, {

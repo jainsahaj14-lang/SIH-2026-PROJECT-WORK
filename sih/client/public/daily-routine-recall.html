@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🔔 Daily Routine Recall</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* -------------------------------------------------------------
+       Daily Routine Recall - Standalone Scoped CSS
+    -------------------------------------------------------------- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: #1C1C2E;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      padding: 24px 16px;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Outer Phone Mockup Frame */
+    .drr-phone-mockup {
+      width: 100%;
+      max-width: 430px;
+      background-color: #1C1C2E;
+      border-radius: 46px;
+      padding: 12px;
+      box-shadow: 
+        0 25px 60px -12px rgba(0, 0, 0, 0.65),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 0 0 2px rgba(0, 0, 0, 0.8);
+      position: relative;
+    }
+
+    /* Speaker / Camera Notch */
+    .drr-phone-notch {
+      width: 110px;
+      height: 18px;
+      background-color: #0F0F1A;
+      border-radius: 12px;
+      margin: 0 auto 10px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .drr-notch-camera {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: #1F2238;
+    }
+
+    .drr-notch-speaker {
+      width: 40px;
+      height: 4px;
+      border-radius: 3px;
+      background-color: #1F2238;
+    }
+
+    /* Card Container (Cream #FAF3E8) */
+    .drr-card {
+      background-color: #FAF3E8;
+      border-radius: 34px;
+      padding: 24px 20px 22px 20px;
+      position: relative;
+      overflow: hidden;
+      min-height: 740px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Header */
+    .drr-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .drr-title-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .drr-title-emoji {
+      font-size: 1.45rem;
+      line-height: 1;
+    }
+
+    .drr-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #000000;
+      letter-spacing: -0.02em;
+    }
+
+    .drr-btn-reset {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background-color: #000000;
+      color: #FAF3E8;
+      border: none;
+      border-radius: 14px;
+      padding: 9px 16px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background-color 0.15s ease, transform 0.15s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+    }
+
+    .drr-btn-reset:hover {
+      background-color: #26263B;
+      transform: translateY(-1px);
+    }
+
+    .drr-btn-reset:active {
+      transform: scale(0.96);
+    }
+
+    /* Divider */
+    .drr-divider {
+      width: 100%;
+      height: 1px;
+      background-color: #000000;
+      opacity: 0.7;
+      margin-bottom: 18px;
+    }
+
+    /* Sequence Diagram (Zigzag) */
+    .drr-sequence-container {
+      position: relative;
+      width: 100%;
+      min-height: 350px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 4px 6px;
+      margin-bottom: 16px;
+    }
+
+    .drr-arrow-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .drr-step-row {
+      display: flex;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .drr-step-row.drr-align-left {
+      justify-content: flex-start;
+      padding-left: 14px;
+    }
+
+    .drr-step-row.drr-align-right {
+      justify-content: flex-end;
+      padding-right: 14px;
+    }
+
+    /* Step Box (#C9C8D6) */
+    .drr-step-box {
+      background-color: #C9C8D6;
+      border-radius: 16px;
+      min-width: 140px;
+      height: 48px;
+      padding: 4px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: #000000;
+      border: 2px solid transparent;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+      position: relative;
+    }
+
+    .drr-step-box.drr-drag-over {
+      border-color: #000000;
+      transform: scale(1.08);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+      background-color: #BCB9CD;
+    }
+
+    .drr-step-box.drr-target-ready {
+      border: 2px dashed #000000;
+      animation: drr-pulse-border 1.5s infinite ease-in-out;
+    }
+
+    .drr-step-box.drr-filled {
+      cursor: grab;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .drr-step-box.drr-filled:active {
+      cursor: grabbing;
+    }
+
+    .drr-step-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: #000000;
+      text-transform: lowercase;
+      white-space: nowrap;
+    }
+
+    .drr-step-emoji {
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    .drr-step-remove-btn {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #000000;
+      color: #FAF3E8;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 900;
+      cursor: pointer;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      z-index: 10;
+    }
+
+    .drr-step-box:hover .drr-step-remove-btn {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Activity Tray */
+    .drr-tray-container {
+      background-color: #FAF3E8;
+      border: 1.5px solid #000000;
+      border-radius: 26px;
+      padding: 18px 12px 16px 12px;
+      position: relative;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      gap: 12px;
+    }
+
+    .drr-tray-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+    }
+
+    .drr-tray-row.drr-tray-row-center {
+      justify-content: center;
+    }
+
+    /* Tray Floating Activity Item */
+    .drr-tray-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      padding: 6px 10px;
+      min-width: 95px;
+      background: transparent;
+      border: none;
+      outline: none;
+      border-radius: 16px;
+      touch-action: none;
+      transition: transform 0.18s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s ease, filter 0.18s ease;
+    }
+
+    .drr-tray-item:hover:not(.drr-placed) {
+      transform: scale(1.08);
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12));
+    }
+
+    .drr-tray-item:active:not(.drr-placed) {
+      cursor: grabbing;
+      transform: scale(1.12);
+    }
+
+    .drr-tray-item.drr-placed {
+      opacity: 0.22;
+      cursor: default;
+      pointer-events: none;
+      transform: scale(0.92);
+    }
+
+    .drr-tray-item.drr-selected {
+      outline: 2px dashed #000000;
+      background-color: rgba(201, 200, 214, 0.35);
+      transform: scale(1.08);
+    }
+
+    .drr-tray-emoji {
+      font-size: 2.25rem;
+      line-height: 1.1;
+      margin-bottom: 4px;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+    }
+
+    .drr-tray-label {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #000000;
+      text-align: center;
+      text-transform: lowercase;
+    }
+
+    /* Feedback Banner */
+    .drr-feedback-banner {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      animation: drr-shake 0.4s ease;
+      background-color: #FEE2E2;
+      border: 1.5px solid #EF4444;
+      color: #B91C1C;
+    }
+
+    /* Touch Ghost */
+    .drr-touch-ghost {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%) scale(1.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(250, 243, 232, 0.96);
+      border: 2px solid #000000;
+      border-radius: 18px;
+      padding: 8px 14px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Modal Backdrop & Card */
+    .drr-modal-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(28, 28, 46, 0.72);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      border-radius: 34px;
+      padding: 20px;
+    }
+
+    .drr-modal-card {
+      background-color: #FAF3E8;
+      border: 3px solid #000000;
+      border-radius: 28px;
+      padding: 32px 24px;
+      text-align: center;
+      max-width: 320px;
+      width: 100%;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+      animation: drr-pop-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .drr-modal-icon-circle {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background-color: #10B981;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px auto;
+      box-shadow: 0 8px 18px rgba(16, 185, 129, 0.35);
+      font-size: 32px;
+      font-weight: 900;
+    }
+
+    .drr-modal-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #000000;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .drr-modal-subtitle {
+      font-size: 0.95rem;
+      color: #475569;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .drr-modal-btn-play {
+      width: 100%;
+      background-color: #000000;
+      color: #FAF3E8;
+      border: none;
+      border-radius: 16px;
+      padding: 14px 20px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    .drr-modal-btn-play:hover {
+      background-color: #1F1F35;
+      transform: translateY(-2px);
+    }
+
+    #confetti-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 99;
+    }
+
+    @keyframes drr-pulse-border {
+      0% { border-color: rgba(0, 0, 0, 0.3); }
+      50% { border-color: rgba(0, 0, 0, 1); transform: scale(1.02); }
+      100% { border-color: rgba(0, 0, 0, 0.3); }
+    }
+
+    @keyframes drr-shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    @keyframes drr-pop-in {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 480px) {
+      .drr-phone-mockup { border-radius: 36px; padding: 8px; }
+      .drr-card { border-radius: 28px; padding: 18px 14px; min-height: 680px; }
+      .drr-sequence-container { min-height: 320px; }
+      .drr-step-box { min-width: 125px; height: 44px; font-size: 0.95rem; }
+      .drr-tray-emoji { font-size: 2rem; }
+      .drr-tray-label { font-size: 0.88rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="drr-phone-mockup">
+    <!-- Phone Top Speaker/Camera Notch -->
+    <div class="drr-phone-notch">
+      <div class="drr-notch-camera"></div>
+      <div class="drr-notch-speaker"></div>
+    </div>
+
+    <!-- Main Game Card -->
+    <div class="drr-card" id="drrCard">
+      <canvas id="confetti-canvas"></canvas>
+
+      <!-- Header -->
+      <div>
+        <div class="drr-header">
+          <div class="drr-title-wrapper">
+            <span class="drr-title-emoji">🔔</span>
+            <h1 class="drr-title" id="gameTitle">Daily routine Recall</h1>
+          </div>
+          <button class="drr-btn-reset" id="resetBtn" type="button" title="Reset and shuffle tray">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+              <path d="M3 3v5h5"/>
+            </svg>
+            <span>Reset</span>
+          </button>
+        </div>
+        <div class="drr-divider"></div>
+      </div>
+
+      <!-- Sequence Diagram Section -->
+      <div class="drr-sequence-container" id="sequenceContainer">
+        <!-- Connecting Arrows SVG -->
+        <svg class="drr-arrow-canvas" id="arrowCanvas">
+          <defs>
+            <marker id="arrowhead" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <polygon points="0 0, 7 3.5, 0 7" fill="#000000" />
+            </marker>
+          </defs>
+          <g id="arrowGroup"></g>
+        </svg>
+
+        <!-- 5 Step Boxes (Zigzag) -->
+        <div class="drr-step-row drr-align-left">
+          <div class="drr-step-box" data-step-number="1" id="stepBox1">
+            <span class="drr-step-placeholder">step 1</span>
+          </div>
+        </div>
+
+        <div class="drr-step-row drr-align-right">
+          <div class="drr-step-box" data-step-number="2" id="stepBox2">
+            <span class="drr-step-placeholder">step 2</span>
+          </div>
+        </div>
+
+        <div class="drr-step-row drr-align-left">
+          <div class="drr-step-box" data-step-number="3" id="stepBox3">
+            <span class="drr-step-placeholder">step 3</span>
+          </div>
+        </div>
+
+        <div class="drr-step-row drr-align-right">
+          <div class="drr-step-box" data-step-number="4" id="stepBox4">
+            <span class="drr-step-placeholder">step 4</span>
+          </div>
+        </div>
+
+        <div class="drr-step-row drr-align-left">
+          <div class="drr-step-box" data-step-number="5" id="stepBox5">
+            <span class="drr-step-placeholder">step 5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity Tray Section -->
+      <div class="drr-tray-container" id="trayContainer">
+        <!-- Row 1 (2 items: wake up, bathing) -->
+        <div class="drr-tray-row" id="trayRow1"></div>
+        <!-- Row 2 (1 item: brush your teeth) -->
+        <div class="drr-tray-row drr-tray-row-center" id="trayRow2"></div>
+        <!-- Row 3 (2 items: eat food, medicine time) -->
+        <div class="drr-tray-row" id="trayRow3"></div>
+      </div>
+
+      <!-- Gentle feedback error banner -->
+      <div class="drr-feedback-banner" id="feedbackBanner" style="display: none;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span id="feedbackText">Not quite right, try again!</span>
+      </div>
+
+      <!-- Success Celebratory Modal -->
+      <div class="drr-modal-backdrop" id="successModal" style="display: none;">
+        <div class="drr-modal-card">
+          <div class="drr-modal-icon-circle">✓</div>
+          <h2 class="drr-modal-title">Routine recalled successfully!</h2>
+          <p class="drr-modal-subtitle">All 5 daily activities are in their logical sequence.</p>
+          <button class="drr-modal-btn-play" id="playAgainBtn" type="button">
+            <span>Play Again</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Touch Drag Ghost Element -->
+  <div class="drr-touch-ghost" id="touchGhost" style="display: none;">
+    <span class="drr-tray-emoji" id="ghostEmoji"></span>
+    <span class="drr-tray-label" id="ghostLabel"></span>
+  </div>
+
+  <script>
+    /* ==============================================================
+       CONFIGURABLE ROUTINE CONFIGURATION
+       Easily change labels, emojis, or the correct mapping here!
+    ============================================================== */
+    const ROUTINE_CONFIG = {
+      title: "Daily routine Recall",
+      titleEmoji: "🔔",
+      totalSteps: 5,
+      // Step to correct activity mapping
+      steps: [
+        { stepNumber: 1, label: "step 1", correctActivityId: "wake_up", align: "left" },
+        { stepNumber: 2, label: "step 2", correctActivityId: "brush_teeth", align: "right" },
+        { stepNumber: 3, label: "step 3", correctActivityId: "bathing", align: "left" },
+        { stepNumber: 4, label: "step 4", correctActivityId: "eat_food", align: "right" },
+        { stepNumber: 5, label: "step 5", correctActivityId: "medicine_time", align: "left" }
+      ],
+      // 5 Tray Activities (screenshot positions & emojis)
+      activities: [
+        { id: "wake_up", label: "wake up", emoji: "🌅" },
+        { id: "bathing", label: "bathing", emoji: "🚿" },
+        { id: "brush_teeth", label: "brush your teeth", emoji: "🪥" },
+        { id: "eat_food", label: "eat food", emoji: "🍔" },
+        { id: "medicine_time", label: "medicine time", emoji: "💊" }
+      ]
+    };
+
+    /* ==============================================================
+       GAME ENGINE & STATE
+    ============================================================== */
+    let placements = {}; // { stepNumber: activityObj }
+    let trayItems = []; // Shuffled activities currently in tray
+    let selectedActivity = null; // For tap-to-place accessibility
+    let draggedPayload = null; // Active drag payload
+    let touchState = null; // Active touch state
+
+    const sequenceContainer = document.getElementById('sequenceContainer');
+    const arrowGroup = document.getElementById('arrowGroup');
+    const feedbackBanner = document.getElementById('feedbackBanner');
+    const successModal = document.getElementById('successModal');
+    const touchGhost = document.getElementById('touchGhost');
+    const ghostEmoji = document.getElementById('ghostEmoji');
+    const ghostLabel = document.getElementById('ghostLabel');
+
+    // Shuffle helper (Fisher-Yates)
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    // Initialize Game
+    function initGame() {
+      placements = {};
+      selectedActivity = null;
+      feedbackBanner.style.display = 'none';
+      successModal.style.display = 'none';
+      
+      // Randomize tray items upon start/reset
+      trayItems = shuffle(ROUTINE_CONFIG.activities);
+      renderTray();
+      renderSteps();
+      updateArrows();
+    }
+
+    // Render Steps
+    function renderSteps() {
+      ROUTINE_CONFIG.steps.forEach(step => {
+        const box = document.getElementById(`stepBox${step.stepNumber}`);
+        const placed = placements[step.stepNumber];
+
+        if (placed) {
+          box.classList.add('drr-filled');
+          box.setAttribute('draggable', 'true');
+          box.innerHTML = `
+            <div class="drr-step-content">
+              <span class="drr-step-emoji">${placed.emoji}</span>
+              <span class="drr-step-label">${placed.label}</span>
+              <button class="drr-step-remove-btn" title="Remove" type="button">✕</button>
+            </div>
+          `;
+          const removeBtn = box.querySelector('.drr-step-remove-btn');
+          removeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            removeStep(step.stepNumber);
+          });
+        } else {
+          box.classList.remove('drr-filled');
+          box.removeAttribute('draggable');
+          box.innerHTML = `<span class="drr-step-placeholder">${step.label}</span>`;
+        }
+      });
+    }
+
+    // Render Tray Items in the 3 rows matching the screenshot:
+    // Row 1: 2 items
+    // Row 2: 1 item (center)
+    // Row 3: 2 items
+    function renderTray() {
+      const row1 = document.getElementById('trayRow1');
+      const row2 = document.getElementById('trayRow2');
+      const row3 = document.getElementById('trayRow3');
+
+      row1.innerHTML = '';
+      row2.innerHTML = '';
+      row3.innerHTML = '';
+
+      trayItems.slice(0, 2).forEach(act => row1.appendChild(createTrayElement(act)));
+      trayItems.slice(2, 3).forEach(act => row2.appendChild(createTrayElement(act)));
+      trayItems.slice(3, 5).forEach(act => row3.appendChild(createTrayElement(act)));
+    }
+
+    function createTrayElement(activity) {
+      const isPlaced = Object.values(placements).some(p => p && p.id === activity.id);
+      const isSelected = selectedActivity && selectedActivity.id === activity.id;
+
+      const div = document.createElement('div');
+      div.className = `drr-tray-item ${isPlaced ? 'drr-placed' : ''} ${isSelected ? 'drr-selected' : ''}`;
+      div.setAttribute('data-activity-id', activity.id);
+      div.setAttribute('draggable', (!isPlaced).toString());
+
+      div.innerHTML = `
+        <span class="drr-tray-emoji">${activity.emoji}</span>
+        <span class="drr-tray-label">${activity.label}</span>
+      `;
+
+      // Tap-to-place
+      div.addEventListener('click', () => {
+        if (isPlaced) return;
+        if (selectedActivity && selectedActivity.id === activity.id) {
+          selectedActivity = null;
+        } else {
+          selectedActivity = activity;
+        }
+        renderTray();
+        highlightReadySteps();
+      });
+
+      // Desktop HTML5 drag start
+      div.addEventListener('dragstart', (e) => {
+        if (isPlaced) {
+          e.preventDefault();
+          return;
+        }
+        draggedPayload = { source: 'tray', activity };
+        e.dataTransfer.setData('text/plain', JSON.stringify(draggedPayload));
+        e.dataTransfer.effectAllowed = 'move';
+      });
+
+      // Mobile Touch Drag
+      div.addEventListener('touchstart', (e) => {
+        if (isPlaced) return;
+        startTouchDrag(e, activity, 'tray');
+      }, { passive: false });
+
+      return div;
+    }
+
+    function highlightReadySteps() {
+      ROUTINE_CONFIG.steps.forEach(step => {
+        const box = document.getElementById(`stepBox${step.stepNumber}`);
+        if (selectedActivity && !placements[step.stepNumber]) {
+          box.classList.add('drr-target-ready');
+        } else {
+          box.classList.remove('drr-target-ready');
+        }
+      });
+    }
+
+    // Step Interactions
+    ROUTINE_CONFIG.steps.forEach(step => {
+      const box = document.getElementById(`stepBox${step.stepNumber}`);
+
+      box.addEventListener('click', () => {
+        if (selectedActivity) {
+          placeActivity(step.stepNumber, selectedActivity);
+          selectedActivity = null;
+          renderTray();
+          highlightReadySteps();
+          return;
+        }
+        if (placements[step.stepNumber]) {
+          removeStep(step.stepNumber);
+        }
+      });
+
+      // Desktop Drag & Drop on Step Box
+      box.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        box.classList.add('drr-drag-over');
+      });
+
+      box.addEventListener('dragleave', () => {
+        box.classList.remove('drr-drag-over');
+      });
+
+      box.addEventListener('drop', (e) => {
+        e.preventDefault();
+        box.classList.remove('drr-drag-over');
+
+        let data = draggedPayload;
+        if (!data) {
+          try {
+            data = JSON.parse(e.dataTransfer.getData('text/plain'));
+          } catch(err) {}
+        }
+        if (data && data.activity) {
+          if (data.source === 'tray') {
+            placeActivity(step.stepNumber, data.activity);
+          } else if (data.source === 'step') {
+            placeActivity(step.stepNumber, data.activity, data.stepNumber);
+          }
+        }
+        draggedPayload = null;
+      });
+
+      // Drag placed step
+      box.addEventListener('dragstart', (e) => {
+        const placed = placements[step.stepNumber];
+        if (!placed) return;
+        draggedPayload = { source: 'step', stepNumber: step.stepNumber, activity: placed };
+        e.dataTransfer.setData('text/plain', JSON.stringify(draggedPayload));
+        e.dataTransfer.effectAllowed = 'move';
+      });
+
+      box.addEventListener('touchstart', (e) => {
+        const placed = placements[step.stepNumber];
+        if (!placed) return;
+        startTouchDrag(e, placed, 'step', step.stepNumber);
+      }, { passive: false });
+    });
+
+    // Place Activity
+    function placeActivity(stepNumber, activity, sourceStepNumber = null) {
+      if (sourceStepNumber && sourceStepNumber !== stepNumber) {
+        const displaced = placements[stepNumber];
+        if (displaced) {
+          placements[sourceStepNumber] = displaced;
+        } else {
+          delete placements[sourceStepNumber];
+        }
+      }
+      placements[stepNumber] = activity;
+      renderSteps();
+      renderTray();
+      highlightReadySteps();
+      checkSequence();
+    }
+
+    // Remove Step
+    function removeStep(stepNumber) {
+      delete placements[stepNumber];
+      feedbackBanner.style.display = 'none';
+      renderSteps();
+      renderTray();
+      highlightReadySteps();
+    }
+
+    // Touch Drag Engine
+    function startTouchDrag(e, activity, source, stepNumber = null) {
+      const touch = e.touches[0];
+      touchState = {
+        activity,
+        source,
+        stepNumber,
+        startX: touch.clientX,
+        startY: touch.clientY
+      };
+
+      ghostEmoji.textContent = activity.emoji;
+      ghostLabel.textContent = activity.label;
+      touchGhost.style.left = `${touch.clientX}px`;
+      touchGhost.style.top = `${touch.clientY}px`;
+      touchGhost.style.display = 'flex';
+    }
+
+    window.addEventListener('touchmove', (e) => {
+      if (!touchState) return;
+      const touch = e.touches[0];
+      touchGhost.style.left = `${touch.clientX}px`;
+      touchGhost.style.top = `${touch.clientY}px`;
+
+      // Find hovered step box
+      const target = document.elementFromPoint(touch.clientX, touch.clientY);
+      ROUTINE_CONFIG.steps.forEach(step => {
+        const box = document.getElementById(`stepBox${step.stepNumber}`);
+        if (target && box && box.contains(target)) {
+          box.classList.add('drr-drag-over');
+        } else {
+          box.classList.remove('drr-drag-over');
+        }
+      });
+    }, { passive: false });
+
+    window.addEventListener('touchend', (e) => {
+      if (!touchState) return;
+      const touch = e.changedTouches[0];
+      touchGhost.style.display = 'none';
+
+      // Clear all drag over classes
+      ROUTINE_CONFIG.steps.forEach(step => {
+        document.getElementById(`stepBox${step.stepNumber}`).classList.remove('drr-drag-over');
+      });
+
+      const target = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (target) {
+        const stepBox = target.closest('[data-step-number]');
+        const trayArea = target.closest('#trayContainer');
+
+        if (stepBox) {
+          const stepNum = parseInt(stepBox.getAttribute('data-step-number'), 10);
+          if (touchState.source === 'tray') {
+            placeActivity(stepNum, touchState.activity);
+          } else if (touchState.source === 'step') {
+            placeActivity(stepNum, touchState.activity, touchState.stepNumber);
+          }
+        } else if (trayArea && touchState.source === 'step') {
+          removeStep(touchState.stepNumber);
+        }
+      }
+
+      touchState = null;
+    });
+
+    // Check Sequence on 5 Placements
+    function checkSequence() {
+      const placedCount = Object.keys(placements).length;
+      if (placedCount < ROUTINE_CONFIG.totalSteps) {
+        feedbackBanner.style.display = 'none';
+        return;
+      }
+
+      let correct = true;
+      for (const step of ROUTINE_CONFIG.steps) {
+        if (!placements[step.stepNumber] || placements[step.stepNumber].id !== step.correctActivityId) {
+          correct = false;
+          break;
+        }
+      }
+
+      if (correct) {
+        feedbackBanner.style.display = 'none';
+        successModal.style.display = 'flex';
+        triggerConfetti();
+      } else {
+        feedbackBanner.style.display = 'flex';
+      }
+    }
+
+    // Dynamic Connecting Arrows Calculation
+    function updateArrows() {
+      if (!sequenceContainer) return;
+      const cRect = sequenceContainer.getBoundingClientRect();
+      if (!cRect.width || !cRect.height) return;
+
+      arrowGroup.innerHTML = '';
+      const steps = ROUTINE_CONFIG.steps;
+
+      for (let i = 0; i < steps.length - 1; i++) {
+        const fromBox = document.getElementById(`stepBox${steps[i].stepNumber}`);
+        const toBox = document.getElementById(`stepBox${steps[i + 1].stepNumber}`);
+
+        if (fromBox && toBox) {
+          const fRect = fromBox.getBoundingClientRect();
+          const tRect = toBox.getBoundingClientRect();
+          const isLeft = steps[i].align === 'left';
+
+          let startX, startY, endX, endY;
+          if (isLeft) {
+            startX = fRect.right - cRect.left;
+            startY = fRect.top + fRect.height * 0.65 - cRect.top;
+            endX = tRect.left - cRect.left - 4;
+            endY = tRect.top + tRect.height * 0.35 - cRect.top;
+          } else {
+            startX = fRect.left - cRect.left;
+            startY = fRect.top + fRect.height * 0.65 - cRect.top;
+            endX = tRect.right - cRect.left + 4;
+            endY = tRect.top + tRect.height * 0.35 - cRect.top;
+          }
+
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', startX);
+          line.setAttribute('y1', startY);
+          line.setAttribute('x2', endX);
+          line.setAttribute('y2', endY);
+          line.setAttribute('stroke', '#000000');
+          line.setAttribute('stroke-width', '1.6');
+          line.setAttribute('marker-end', 'url(#arrowhead)');
+          arrowGroup.appendChild(line);
+        }
+      }
+    }
+
+    // Confetti Animation
+    function triggerConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      const card = document.getElementById('drrCard');
+      canvas.width = card.offsetWidth;
+      canvas.height = card.offsetHeight;
+
+      const particles = [];
+      const colors = ['#10B981', '#3B82F6', '#F59E0B', '#EC4899', '#8B5CF6'];
+
+      for (let i = 0; i < 65; i++) {
+        particles.push({
+          x: canvas.width * 0.5,
+          y: canvas.height * 0.45,
+          vx: (Math.random() - 0.5) * 12,
+          vy: (Math.random() - 0.9) * 14,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          vRot: (Math.random() - 0.5) * 8,
+          gravity: 0.35,
+          opacity: 1
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let alive = false;
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += p.gravity;
+          p.rotation += p.vRot;
+          p.opacity -= 0.012;
+
+          if (p.opacity > 0) {
+            alive = true;
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate((p.rotation * Math.PI) / 180);
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = Math.max(0, p.opacity);
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+            ctx.restore();
+          }
+        });
+
+        if (alive) {
+          requestAnimationFrame(draw);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+      draw();
+    }
+
+    // Event Listeners
+    document.getElementById('resetBtn').addEventListener('click', initGame);
+    document.getElementById('playAgainBtn').addEventListener('click', initGame);
+    window.addEventListener('resize', updateArrows);
+
+    // Initial load
+    initGame();
+  </script>
+</body>
+</html>

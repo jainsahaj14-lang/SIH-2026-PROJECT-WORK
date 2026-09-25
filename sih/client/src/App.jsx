@@ -59,6 +59,7 @@ export default function App() {
             <Route path="/games" element={<GamesHub />} />
             <Route path="/games/memory-match" element={<MemoryMatchPage />} />
             <Route path="/games/routine-recall" element={<RoutineRecallGame />} />
+            <Route path="/daily-routine-recall" element={<RoutineRecallGame />} />
             <Route path="/memory-game" element={<RememberAndMatchPage />} />
             <Route path="/pattern-sequence" element={<PatternAndSequencePage />} />
             <Route path="/memory-match" element={<MemoryMatchPage />} />
