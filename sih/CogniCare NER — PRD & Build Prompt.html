@@ -1,0 +1,297 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}</style><style>:root{color-scheme:light dark;--md-bg:#fff;--md-text:rgba(0,0,0,.8);--md-muted:rgba(0,0,0,.6);--md-fill:rgba(0,0,0,.04);--md-fill-strong:rgba(0,0,0,.06);--md-rule:rgba(0,0,0,.1);--md-rule-strong:rgba(0,0,0,.16);--md-link:hsl(210 100% 45%)}@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){--md-bg:#0d0d0d;--md-text:rgba(255,255,255,.85);--md-muted:rgba(255,255,255,.6);--md-fill:rgba(255,255,255,.06);--md-fill-strong:rgba(255,255,255,.09);--md-rule:rgba(255,255,255,.14);--md-rule-strong:rgba(255,255,255,.22);--md-link:hsl(210 100% 72%)}}:root[data-theme="dark"]{color-scheme:dark;--md-bg:#0d0d0d;--md-text:rgba(255,255,255,.85);--md-muted:rgba(255,255,255,.6);--md-fill:rgba(255,255,255,.06);--md-fill-strong:rgba(255,255,255,.09);--md-rule:rgba(255,255,255,.14);--md-rule-strong:rgba(255,255,255,.22);--md-link:hsl(210 100% 72%)}:root[data-theme="light"]{color-scheme:light}@media print{:root,:root[data-theme="dark"]{color-scheme:light;--md-bg:#fff;--md-text:rgba(0,0,0,.8);--md-muted:rgba(0,0,0,.6);--md-fill:rgba(0,0,0,.04);--md-fill-strong:rgba(0,0,0,.06);--md-rule:rgba(0,0,0,.1);--md-rule-strong:rgba(0,0,0,.16);--md-link:hsl(210 100% 45%)}}body{background:var(--md-bg);color:var(--md-text);max-width:720px;margin:0 auto;padding:32px;display:flex;flex-direction:column;gap:10px;font:14px/1.55 -apple-system,BlinkMacSystemFont,'SF Pro','Segoe UI',sans-serif;overflow-wrap:break-word}body>:first-child{margin-top:0}h1,h2,h3,h4,h5,h6{margin:6px 0 0;line-height:1.25;font-weight:600;text-wrap:balance}h1{font-size:1.35em}h2{font-size:1.15em;color:var(--md-muted)}h3,h4,h5,h6{font-size:1em}p,ul,ol,blockquote,table,pre,hr{margin:0}strong{font-weight:600}a{color:var(--md-link);text-decoration:none}a:hover{text-decoration:underline}ul,ol{display:flex;flex-direction:column;gap:6px;padding-left:22px}ul{list-style:disc}ol{list-style:decimal}:is(li,td,th)>*+:is(p,ul,ol,blockquote){margin-top:6px}blockquote{display:flex;flex-direction:column;gap:10px;border-left:2px solid var(--md-rule);padding-left:10px;color:var(--md-muted)}:not(pre)>code{background:var(--md-fill);padding:1px 3px;border-radius:4px;font:.92em 'SF Mono',ui-monospace,Menlo,Consolas,monospace}a>code{background:none;color:inherit}pre{background:var(--md-fill);padding:10px 12px;border-radius:6px;overflow-x:auto;font:12px/1.5 'SF Mono',ui-monospace,Menlo,Consolas,monospace;margin-block:4px}pre code{background:none;padding:0;font:inherit}table{width:100%;border-collapse:separate;border-spacing:2px;font:inherit}th,td{padding:6px 8px;border-radius:3px;text-align:left;vertical-align:top}th{background:var(--md-fill-strong);font-weight:600}td{background:var(--md-fill)}:is(th,td) :not(pre)>code{background:transparent}hr{border:0;border-top:1px solid var(--md-rule-strong);margin-block:10px}img{max-width:100%;height:auto;border-radius:4px}</style>
+</head><body>
+<h1>Product Requirements Document</h1>
+<h2>CogniCare NER — AI-Powered Cognitive Gaming &amp; Memory Assistance Platform for Elderly Dementia Patients</h2>
+<p><strong>Stack:</strong> MERN (MongoDB, Express.js, React, Node.js)
+<strong>Deployment target (Phase 1):</strong> Local / offline-first, single-machine or LAN deployment
+<strong>Document version:</strong> 1.0
+<strong>Prepared for:</strong> SIH / Hackathon submission — North Eastern Region elderly healthcare</p>
+<hr>
+<h2>1. Problem Statement Summary</h2>
+<p>Elderly patients in the North Eastern Region (NER) suffer from rising rates of dementia and cognitive decline, with limited access to neurological care due to geography and thin healthcare infrastructure. Caregivers struggle with continuous monitoring. There is no affordable, culturally-relevant, multilingual digital cognitive therapy tool built for this population. CogniCare NER addresses this gap with an adaptive cognitive gaming platform that works offline, speaks regional languages, and gives caregivers visibility into patient progress.</p>
+<hr>
+<h2>2. Goals &amp; Success Metrics</h2>
+<table>
+<thead>
+<tr>
+<th>Goal</th>
+<th>Metric</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Improve cognitive engagement</td>
+<td>Avg. sessions/week per patient ≥ 4</td>
+</tr>
+<tr>
+<td>Adaptive difficulty works</td>
+<td>≥70% of sessions end in &quot;flow zone&quot; (60–85% success rate)</td>
+</tr>
+<tr>
+<td>Caregiver visibility</td>
+<td>Caregiver dashboard viewed ≥ 2x/week</td>
+</tr>
+<tr>
+<td>Works offline</td>
+<td>100% of game modules playable with zero connectivity</td>
+</tr>
+<tr>
+<td>Elderly usability</td>
+<td>Task completion without assistance ≥ 80% in usability testing</td>
+</tr>
+<tr>
+<td>Reminder adherence</td>
+<td>≥70% reminders acknowledged within 30 min</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>3. Users &amp; Personas</h2>
+<ol>
+<li><strong>Patient (Elderly, 60–85, mild-to-moderate cognitive decline)</strong> — large text/buttons, voice-first, regional language (Assamese, Bodo, Khasi, Mizo, Nepali, Manipuri, Hindi, English to start), low digital literacy.</li>
+<li><strong>Caregiver / Family member</strong> — monitors progress remotely, sets reminders, receives alerts.</li>
+<li><strong>Healthcare Worker / ASHA-style user</strong> — manages multiple patients, views aggregated cognitive trend dashboards, flags concerning patterns.</li>
+<li><strong>Admin (clinic/NGO)</strong> — manages patient accounts, content, and language packs.</li>
+</ol>
+<hr>
+<h2>4. Functional Requirements (mapped to problem statement)</h2>
+<h3>a. Cognitive Game Modules</h3>
+<ul>
+<li><strong>Memory Match</strong> — card-pairing with familiar regional objects/faces</li>
+<li><strong>Daily Routine Recall</strong> — sequence-ordering of daily tasks (brushing → bathing → eating, shown as images)</li>
+<li><strong>Pattern &amp; Object Recognition</strong> — identify odd-one-out, match shapes/regional motifs</li>
+<li><strong>Attention/Concentration</strong> — spot-the-difference, simple reaction-time tasks</li>
+<li><strong>Reminiscence/Emotional Engagement</strong> — audio-triggered &quot;tell me about this&quot; prompts with familiar regional imagery (tea gardens, festivals, local landmarks)</li>
+</ul>
+<h3>b. Adaptive Difficulty Engine (AI/ML)</h3>
+<ul>
+<li>Tracks per-game accuracy, response time, hesitation patterns, and streaks</li>
+<li>Adjusts difficulty tier (Easy/Medium/Hard) per session using a rolling-performance model (rule-based + lightweight ML classifier — see Section 8)</li>
+<li>Flags cognitive decline/improvement trends over time for healthcare worker review</li>
+</ul>
+<h3>c. Multilingual &amp; Voice</h3>
+<ul>
+<li>UI language packs: English, Hindi, Assamese, Bodo, Khasi, Nepali, Manipuri (extensible JSON i18n structure)</li>
+<li>Voice instructions via text-to-speech (offline TTS engine bundled) per language</li>
+<li>Voice input for simple commands (&quot;start game&quot;, &quot;next&quot;, &quot;help&quot;) using on-device speech recognition where feasible</li>
+</ul>
+<h3>d. Cultural Familiarity</h3>
+<ul>
+<li>Regional imagery/icon packs (configurable by admin per state/community)</li>
+<li>Local festival themes, folk-pattern visuals, regional audio cues instead of generic sounds</li>
+</ul>
+<h3>e. Reminders</h3>
+<ul>
+<li>Medicine reminders (time + dosage + photo of pill/strip)</li>
+<li>Hydration nudges (interval-based)</li>
+<li>Daily activity prompts (walk, game session, meal)</li>
+<li>Medical appointment reminders (date/time, synced when online)</li>
+<li>All reminders queue locally and fire via local notifications even offline</li>
+</ul>
+<h3>f. Caregiver/Healthcare Worker Dashboard</h3>
+<ul>
+<li>Patient list with last-active, streak, and cognitive trend sparkline</li>
+<li>Per-patient drill-down: game-by-game accuracy over time, reminder adherence, session duration</li>
+<li>Alerts: missed medication, sudden performance drop, prolonged inactivity</li>
+<li>Exportable weekly summary (PDF/CSV)</li>
+</ul>
+<h3>g. Offline-First / Low-Connectivity</h3>
+<ul>
+<li>All games and reminder logic run fully client-side (IndexedDB/local storage)</li>
+<li>Background sync service pushes session logs to MongoDB backend when connectivity resumes</li>
+<li>Conflict resolution: last-write-wins per session-ID with timestamp</li>
+</ul>
+<h3>h. Elderly-Friendly UI/UX</h3>
+<ul>
+<li>Large tap targets (min 64px), high-contrast themes, minimal text, icon-first navigation</li>
+<li>Single-task-per-screen design, no nested menus deeper than 2 levels</li>
+<li>Optional &quot;Simple Mode&quot; (voice + 3 buttons only) vs &quot;Full Mode&quot; (for tech-comfortable users/family setup)</li>
+</ul>
+<hr>
+<h2>5. Non-Functional Requirements</h2>
+<ul>
+<li><strong>Offline-first architecture</strong> using Service Workers (PWA) + IndexedDB</li>
+<li><strong>Data privacy</strong>: patient health data encrypted at rest (AES-256) and in transit (TLS); role-based access control</li>
+<li><strong>Performance</strong>: game load time &lt; 2s on low-end Android tablets (2GB RAM)</li>
+<li><strong>Accessibility</strong>: WCAG 2.1 AA where applicable, screen-reader-compatible labels</li>
+<li><strong>Scalability</strong>: backend designed to later scale from local/LAN to cloud (stateless Express API, MongoDB Atlas migration path)</li>
+<li><strong>Localization</strong>: all copy externalized to i18n JSON, no hardcoded strings</li>
+</ul>
+<hr>
+<h2>6. Technical Architecture (MERN, local-first)</h2>
+<pre><code>┌─────────────────────────────────────────────┐
+│              React Frontend (PWA)            │
+│  - Game Engine (Canvas/DOM based mini-games)  │
+│  - i18n layer (react-i18next)                 │
+│  - Offline store: IndexedDB (Dexie.js)        │
+│  - Service Worker (Workbox) for offline cache │
+│  - TTS/STT: Web Speech API + offline fallback │
+└───────────────────┬───────────────────────────┘
+                     │ REST API (Axios) — only when online
+┌───────────────────▼───────────────────────────┐
+│           Node.js + Express.js Backend         │
+│  - Auth (JWT, role-based: patient/caregiver/   │
+│    healthcare worker/admin)                    │
+│  - Adaptive difficulty engine (Node module)    │
+│  - Reminder scheduler (node-cron)              │
+│  - Sync API (session logs, reminders)          │
+│  - Dashboard aggregation API                   │
+└───────────────────┬───────────────────────────┘
+                     │ Mongoose ODM
+┌───────────────────▼───────────────────────────┐
+│              MongoDB (local instance)          │
+│  Collections: users, patients, gameSessions,    │
+│  reminders, cognitiveScores, languagePacks      │
+└─────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Local run setup:</strong> MongoDB Community running locally (<code>mongodb://localhost:27017</code>), Express API on <code>localhost:5000</code>, React dev server on <code>localhost:3000</code> (or served as static build via Express for a single-process local demo).</p>
+<hr>
+<h2>7. Core Data Models (MongoDB Collections)</h2>
+<p><strong>User</strong></p>
+<pre><code>{ _id, role: &#34;patient&#34;|&#34;caregiver&#34;|&#34;healthworker&#34;|&#34;admin&#34;,
+  name, phone, preferredLanguage, linkedPatients: [ObjectId],
+  createdAt }
+</code></pre>
+<p><strong>Patient</strong></p>
+<pre><code>{ _id, userId, age, cognitiveBaseline: &#34;mild&#34;|&#34;moderate&#34;|&#34;severe&#34;,
+  currentDifficultyTier: {memory:1, attention:1, pattern:1, routine:1},
+  caregiverIds: [ObjectId], region, preferredLanguage }
+</code></pre>
+<p><strong>GameSession</strong></p>
+<pre><code>{ _id, patientId, gameType, difficultyTier, startTime, endTime,
+  accuracy, avgResponseTimeMs, hesitationCount, completed, syncedAt }
+</code></pre>
+<p><strong>Reminder</strong></p>
+<pre><code>{ _id, patientId, type: &#34;medicine&#34;|&#34;hydration&#34;|&#34;activity&#34;|&#34;appointment&#34;,
+  scheduleTime, recurrence, label, photoUrl, acknowledgedAt }
+</code></pre>
+<p><strong>CognitiveScore</strong> (aggregated, computed nightly/on sync)</p>
+<pre><code>{ _id, patientId, weekOf, avgAccuracyByGame: {...}, trend: &#34;improving&#34;|&#34;stable&#34;|&#34;declining&#34; }
+</code></pre>
+<hr>
+<h2>8. Adaptive Difficulty — ML Approach (Phase 1, lightweight)</h2>
+<p>Phase 1 (hackathon-feasible): <strong>rule-based adaptive engine</strong></p>
+<ul>
+<li>If last 3 sessions' accuracy &gt; 85% → increase tier</li>
+<li>If accuracy &lt; 50% → decrease tier</li>
+<li>If response time increasing while accuracy stable → flag possible fatigue, not decline</li>
+</ul>
+<p>Phase 2 (stretch/ML upgrade): a small <strong>logistic regression / decision-tree classifier</strong> (scikit-learn, trained offline, exported to ONNX or reimplemented as simple weighted scoring in Node) using features: accuracy trend, response-time trend, hesitation rate, session frequency → predicts <code>difficulty_adjustment</code> and <code>decline_risk_flag</code>. This keeps the &quot;AI/ML adapts difficulty&quot; requirement genuinely model-driven without needing heavy infra.</p>
+<hr>
+<h2>9. MVP Scope (for hackathon/demo, local MERN)</h2>
+<p><strong>In scope:</strong></p>
+<ul>
+<li>2 game modules fully working (Memory Match + Daily Routine Recall)</li>
+<li>Rule-based adaptive difficulty</li>
+<li>2 languages (English + 1 regional, e.g., Assamese) with TTS instructions</li>
+<li>Medicine + hydration reminders (local notifications)</li>
+<li>Caregiver dashboard: patient list + per-patient session history + trend chart</li>
+<li>Offline play with sync-on-reconnect</li>
+<li>JWT auth with patient/caregiver/healthworker roles</li>
+</ul>
+<p><strong>Out of scope for MVP (roadmap):</strong></p>
+<ul>
+<li>Full 5-language pack, voice command input, appointment sync, PDF export, ML classifier upgrade, native mobile app (React Native) — noted as Phase 2/3.</li>
+</ul>
+<hr>
+<h2>10. Roadmap</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Scope</th>
+<th>Timeline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phase 0</td>
+<td>PRD, wireframes, schema finalization</td>
+<td>Week 1</td>
+</tr>
+<tr>
+<td>Phase 1 (MVP)</td>
+<td>2 games, rule-based adaptivity, 2 languages, caregiver dashboard, offline sync — local MERN</td>
+<td>Weeks 2–4</td>
+</tr>
+<tr>
+<td>Phase 2</td>
+<td>All 4 game types, 5+ languages, voice input, ML-based adaptivity, reminders (all 4 types), alerts</td>
+<td>Weeks 5–8</td>
+</tr>
+<tr>
+<td>Phase 3</td>
+<td>Cloud deployment, PWA install, tablet optimization, pilot with NER healthcare partner</td>
+<td>Weeks 9–12</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>11. Local Development Setup</h2>
+<pre><code class="language-bash"># Backend
+cd server
+npm install
+npm run dev        # Express on localhost:5000, connects to local MongoDB
+
+# Frontend
+cd client
+npm install
+npm start           # React on localhost:3000
+
+# MongoDB (local)
+mongod --dbpath ./data/db
+</code></pre>
+<p><code>.env</code> (server): <code>MONGO_URI=mongodb://localhost:27017/cognicare_ner</code>, <code>JWT_SECRET=...</code>, <code>PORT=5000</code></p>
+<hr>
+<h2>12. Build Prompt (for Claude Code / AI code generation)</h2>
+<p>Use this as the initial instruction when generating the codebase:</p>
+<blockquote>
+<p>Build a MERN stack web application called <strong>CogniCare NER</strong>, an offline-first cognitive gaming and reminder platform for elderly dementia patients in India's North Eastern Region, following this PRD. Requirements:</p>
+<ol>
+<li>Set up a monorepo with <code>/client</code> (React + Vite, PWA-enabled via Workbox, react-i18next for i18n, Dexie.js for IndexedDB offline storage) and <code>/server</code> (Node.js + Express + Mongoose, JWT auth with roles: patient, caregiver, healthworker, admin).</li>
+<li>Implement the MongoDB schemas exactly as specified in Section 7 (User, Patient, GameSession, Reminder, CognitiveScore).</li>
+<li>Build two playable mini-games as React components with large, high-contrast, elderly-friendly UI: (a) Memory Match (card pairs with image assets), (b) Daily Routine Recall (drag-to-order sequence of daily activity icons). Each game must log accuracy, response time, and hesitation count locally, then sync to the backend when online.</li>
+<li>Implement the rule-based adaptive difficulty engine described in Section 8 as a reusable server-side module, exposed via an API endpoint that returns the next difficulty tier given a patient's recent session history.</li>
+<li>Add a reminders module: CRUD API for medicine/hydration/activity/appointment reminders, with local browser notifications firing from IndexedDB-cached reminder data even when offline, syncing acknowledgments when back online.</li>
+<li>Build a caregiver/healthworker dashboard (protected route) showing: patient list, per-patient session history table, an accuracy-trend line chart (use a lightweight chart library), and a reminder-adherence summary.</li>
+<li>Implement i18n with at least English and one regional language (Assamese), with all UI strings externalized to JSON language files, and add text-to-speech playback of game instructions using the Web Speech API with graceful fallback if unavailable.</li>
+<li>Implement offline-first behavior: a service worker caches the app shell and game assets; all gameplay and reminder-ack writes go to IndexedDB first and sync to MongoDB via a background sync queue when connectivity is detected.</li>
+<li>Set up local run instructions matching Section 11 — no cloud dependencies required to run and demo the app end-to-end on localhost.</li>
+<li>Keep the codebase modular and commented so game modules, language packs, and the difficulty engine can each be extended independently in later phases.</li>
+</ol>
+<p>Start by scaffolding the project structure and schemas, then build the auth flow, then the two game modules, then reminders, then the caregiver dashboard, then offline/i18n/voice layers.</p>
+</blockquote>
+<hr>
+<h2>13. Risks &amp; Mitigations</h2>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Low digital literacy of elderly users</td>
+<td>Voice-first &quot;Simple Mode&quot;, caregiver-assisted onboarding</td>
+</tr>
+<tr>
+<td>Poor/no connectivity in remote NER areas</td>
+<td>Full offline-first architecture, background sync</td>
+</tr>
+<tr>
+<td>Language coverage limited at MVP</td>
+<td>Extensible i18n JSON structure, community-sourced translations post-pilot</td>
+</tr>
+<tr>
+<td>Data privacy for health info</td>
+<td>Encryption at rest/in transit, RBAC, local-first storage minimizes exposure</td>
+</tr>
+<tr>
+<td>False difficulty/decline flags</td>
+<td>Start rule-based, validate with clinicians before enabling ML-driven alerts</td>
+</tr>
+</tbody>
+</table>
+
+</body></html>

@@ -1,0 +1,15 @@
+{
+  "name": "cognicare-ner",
+  "version": "1.0.0",
+  "description": "Offline-First AI-Adaptive Cognitive Gaming and Memory Platform for Elderly Dementia Patients in India's North Eastern Region",
+  "private": true,
+  "scripts": {
+    "server": "cmd /c \"cd server && npm run dev\"",
+    "client": "cmd /c \"cd client && npm run dev\"",
+    "seed": "cmd /c \"cd server && npm run seed\"",
+    "install:all": "cmd /c \"cd server && npm install\" && cmd /c \"cd client && npm install\""
+  },
+  "keywords": ["dementia", "cognitive-therapy", "elderly", "offline-first", "ner", "mern"],
+  "author": "CogniCare Team",
+  "license": "MIT"
+}

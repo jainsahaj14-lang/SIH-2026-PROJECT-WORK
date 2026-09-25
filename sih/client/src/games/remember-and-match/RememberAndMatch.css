@@ -1,0 +1,448 @@
+/* ==========================================================================
+   Remember & Match — Scoped Component Styles
+   Namespaced strictly with the "rm-" prefix to guarantee zero leakage.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap');
+
+/* Center the game card inside the parent site layout */
+.rm-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 32px 16px;
+  width: 100%;
+  min-height: calc(100vh - 180px);
+}
+
+/* Scoped font applied only within the game container */
+.rm-game-container,
+.rm-game-container * {
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  box-sizing: border-box;
+}
+
+/* Centered phone-width game panel (390px - 420px) matching Figma design */
+.rm-game-container {
+  width: 100%;
+  max-width: 414px;
+  background-color: #FFF7EE;
+  border: 1.5px solid #F3E5D8;
+  border-radius: 32px;
+  padding: 28px 22px;
+  box-shadow: 0 16px 40px rgba(78, 52, 40, 0.08);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 0 auto;
+}
+
+/* Header Section */
+.rm-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.rm-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.rm-lightbulb-icon {
+  font-size: 26px;
+  line-height: 1;
+  display: inline-block;
+}
+
+.rm-title {
+  font-size: 24px;
+  font-weight: 900;
+  color: #2E221D;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.rm-subtitle {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #7D6B61;
+  margin: 0 auto;
+  line-height: 1.45;
+  max-width: 320px;
+}
+
+/* Top Stats Pills Row */
+.rm-pills-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.rm-pill {
+  background-color: #FFFFFF;
+  border: 1.5px solid #EFE0D3;
+  border-radius: 9999px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #57473E;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+  white-space: nowrap;
+}
+
+.rm-pill-difficulty {
+  cursor: pointer;
+  background-color: #FFFFFF;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.rm-pill-difficulty:hover {
+  background-color: #FFF0E2;
+  border-color: #E2CFC0;
+}
+
+.rm-pill-badge {
+  color: #D96B43;
+  font-weight: 800;
+}
+
+.rm-pill-value {
+  color: #2E221D;
+  font-weight: 800;
+}
+
+/* Difficulty Selector Dropdown / Row */
+.rm-difficulty-selector {
+  display: flex;
+  gap: 6px;
+  background: #FFFFFF;
+  border: 1.5px solid #EFE0D3;
+  border-radius: 16px;
+  padding: 6px;
+  margin-bottom: 18px;
+  justify-content: center;
+}
+
+.rm-diff-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #7D6B61;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.rm-diff-btn.rm-active {
+  background-color: #D96B43;
+  color: #FFFFFF;
+  box-shadow: 0 3px 8px rgba(217, 107, 67, 0.3);
+}
+
+/* Phase Banner & Question */
+.rm-prompt-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.rm-question {
+  font-size: 19px;
+  font-weight: 800;
+  color: #2E221D;
+  margin: 0 0 6px 0;
+}
+
+.rm-phase-hint {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #8C7A70;
+  margin: 0;
+}
+
+/* Memorize Phase Specifics */
+.rm-memorize-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 10px 0 24px 0;
+}
+
+.rm-memorize-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 10px;
+}
+
+.rm-memorize-tile {
+  width: 76px;
+  height: 76px;
+  background-color: #FADFD2;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  box-shadow: 0 6px 14px rgba(217, 107, 67, 0.12);
+  border: 2px solid #F3CFBE;
+  animation: rmPopIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rm-timer-bar-wrap {
+  width: 100%;
+  height: 8px;
+  background-color: #EFE0D3;
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.rm-timer-bar-fill {
+  height: 100%;
+  background-color: #3FA85C;
+  border-radius: 9999px;
+  transition: width 0.1s linear;
+}
+
+.rm-ready-btn {
+  background-color: #FFFFFF;
+  border: 2px solid #EFE0D3;
+  color: #57473E;
+  font-size: 14px;
+  font-weight: 800;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  cursor: pointer;
+  min-height: 48px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.rm-ready-btn:hover {
+  background-color: #FFF0E2;
+  border-color: #E2CFC0;
+}
+
+/* Recall Phase Grid */
+.rm-grid {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 22px;
+  justify-content: center;
+}
+
+/* 4 columns layout for Easy (4x2) and Hard (4x3) */
+.rm-grid-4-cols {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* 5 columns layout for Medium (5x2) */
+.rm-grid-5-cols {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* Individual Peach Emoji Tile */
+.rm-tile {
+  background-color: #FADFD2;
+  border: 2.5px solid transparent;
+  border-radius: 18px;
+  aspect-ratio: 1 / 1;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+  position: relative;
+  outline: none;
+  padding: 0;
+  box-shadow: 0 3px 8px rgba(217, 107, 67, 0.08);
+}
+
+.rm-tile:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(217, 107, 67, 0.16);
+}
+
+.rm-tile:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+/* Selected state during recall */
+.rm-tile.rm-selected {
+  background-color: #F9D4C2;
+  border-color: #D96B43;
+  box-shadow: 0 0 0 2px rgba(217, 107, 67, 0.25), 0 6px 16px rgba(217, 107, 67, 0.18);
+  transform: scale(1.02);
+}
+
+/* Result Phase States */
+.rm-tile.rm-correct {
+  background-color: #E4F6E9;
+  border-color: #3FA85C;
+  box-shadow: 0 0 0 2px rgba(63, 168, 92, 0.3);
+}
+
+.rm-tile.rm-incorrect-pick {
+  background-color: #FCE8E2;
+  border-color: #E07A5F;
+  opacity: 0.65;
+}
+
+.rm-tile.rm-missed-target {
+  background-color: #F5EFEB;
+  border: 2px dashed #3FA85C;
+  opacity: 0.75;
+}
+
+.rm-tile.rm-unselected-distractor {
+  opacity: 0.35;
+  background-color: #F4ECE6;
+}
+
+/* Result Indicator Badge on Tile */
+.rm-tile-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 900;
+  color: #FFFFFF;
+}
+
+.rm-tile-badge-correct {
+  background-color: #3FA85C;
+}
+
+.rm-tile-badge-wrong {
+  background-color: #E07A5F;
+}
+
+/* Feedback Line */
+.rm-feedback-box {
+  text-align: center;
+  margin-bottom: 20px;
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rm-feedback-text {
+  font-size: 16px;
+  font-weight: 800;
+  color: #2E221D;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.rm-feedback-sub {
+  font-size: 13px;
+  font-weight: 700;
+  color: #7D6B61;
+  margin-top: 4px;
+}
+
+/* Action Buttons (Submit / Next Round) */
+.rm-btn-action {
+  width: 100%;
+  min-height: 60px;
+  border-radius: 9999px;
+  border: none;
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  user-select: none;
+  outline: none;
+}
+
+/* Green "Next Round" Button matching Figma */
+.rm-btn-green {
+  background-color: #3FA85C;
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(63, 168, 92, 0.35);
+}
+
+.rm-btn-green:hover:not(:disabled) {
+  background-color: #369450;
+  box-shadow: 0 8px 22px rgba(63, 168, 92, 0.42);
+}
+
+.rm-btn-green:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Peach/Terra "Check Answers" Button */
+.rm-btn-submit {
+  background-color: #D96B43;
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(217, 107, 67, 0.35);
+}
+
+.rm-btn-submit:hover:not(:disabled) {
+  background-color: #C55E38;
+}
+
+.rm-btn-submit:disabled {
+  background-color: #D8C7BC;
+  color: #FFFFFF;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+/* Footer Encouragement Note */
+.rm-footer-note {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #8C7A70;
+  line-height: 1.5;
+  padding: 0 10px;
+}
+
+/* Smooth Entrance Animation */
+@keyframes rmPopIn {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Accessibility focus state */
+.rm-tile:focus-visible,
+.rm-btn-action:focus-visible,
+.rm-pill-difficulty:focus-visible {
+  outline: 3px solid #D96B43;
+  outline-offset: 2px;
+}
