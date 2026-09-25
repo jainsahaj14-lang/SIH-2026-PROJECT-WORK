@@ -9,7 +9,17 @@
     "seed": "cmd /c \"cd server && npm run seed\"",
     "install:all": "cmd /c \"cd server && npm install\" && cmd /c \"cd client && npm install\""
   },
-  "keywords": ["dementia", "cognitive-therapy", "elderly", "offline-first", "ner", "mern"],
+  "keywords": [
+    "dementia",
+    "cognitive-therapy",
+    "elderly",
+    "offline-first",
+    "ner",
+    "mern"
+  ],
   "author": "CogniCare Team",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.117.2"
+  }
 }
